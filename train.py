@@ -77,15 +77,15 @@ def test(best_weights):
     print("Agverage condifence for every prediction: ", np.mean(sum(confidencecs, [])))
 
 
-def predict(img_path, model_path, num_plate=1):
+def predict(img, model_path="yolov8_model.pt", num_plate=1):
     """"
     Args:
-        img_path (str): path to the image
+        img (Image): image opened with PIL
         model_path (str): path to the weights that is going to be used to prediciton
         num_plate (int): tells how many number plates are expected in an image, default value 1
     """
     model = YOLO(model_path)
-    img = Image.open(img_path)
+    #img = Image.open(img_path)
     if img.size[0] != 640 and img.size[1] !=640:
         img = img.resize((640,640))
     prediction = model(source=img)
