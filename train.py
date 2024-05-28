@@ -90,18 +90,21 @@ def predict(img, model_path="yolov8_model.pt", num_plate=1):
         img = img.resize((640,640))
     prediction = model(source=img)
     for result in prediction:
-        if result.boxes.conf.size()[0] > 1 and num_plate==1:
-            best_index = 0
-            best_conf = float('inf')
-            for j in range(0,result.boxes.conf.size()[0]):
-                if best_conf<result.boxes.conf.to('cpu')[j]:
-                    best_index = j
-                    best_conf = result.boxes.conf.to('cpu')[j]
-            return result.boxes.xywhn[best_index].to('cpu')
+        if result.boxes.shape[0] !=0:
+            if result.boxes.conf.size()[0] > 1 and num_plate==1:
+                best_index = 0
+                best_conf = float('inf')
+                for j in range(0,result.boxes.conf.size()[0]):
+                    if best_conf<result.boxes.conf.to('cpu')[j]:
+                        best_index = j
+                        best_conf = result.boxes.conf.to('cpu')[j]
+                return result.boxes.xywhn[best_index].to('cpu')
 
 
+            else:
+                return result.boxes.xywhn.to('cpu')
         else:
-            return result.boxes.xywhn.to('cpu')
+            return None
     #u.draw_pose()
     
 
@@ -116,8 +119,8 @@ def predict_draw(img_path, bbox):
 
 
 
-
-#bbox = predict(img_path = os.getcwd()+"\\test_data\images\\test.jpg", model_path = "runs\detect\\train14_dropout\weights\\best.pt")
+#img = Image.open(os.getcwd()+"\\test_data\images\\test_adjecent.jpg")
+#bbox = predict(img)
 #u.draw_pose(image = os.getcwd()+"\\test_data\images\\test.jpg", data = bbox, offset=False)
 
 
