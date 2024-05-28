@@ -1,1 +1,11 @@
+
+### folders ###
 **/data
+**/runs
+**/wandb
+**/__pycache__
+**/test_data
+
+
+### files ###
+notes.md

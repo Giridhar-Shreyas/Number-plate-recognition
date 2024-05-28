@@ -97,5 +97,3 @@ def convert_label(label):
         return str(0)+' '+str(xcent)+' '+str(ycent)+' '+str(width)+' '+str(height)
     except OSError as e:
         return None
-
-test_draw_pose()
