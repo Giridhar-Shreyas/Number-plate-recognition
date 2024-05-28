@@ -5,23 +5,31 @@ import matplotlib.patches as patches
 from PIL import Image
 
 
-def draw_pose(image, data):
+def draw_pose(image, data, offset=True):
     """
     Args: 
         image (str): Path to the image with the resolution 640x640
         data list[[float]]: A 2-d list of exactly 5 values with format [class, x center, y center, width, height]
+        offset (bool): tells if there is class in the data list or not
     """
 
     im = Image.open(image)
+    if im.size[0] != 640 and im.size[1] !=640:
+        im = im.resize((640,640))
     fig, ax = plt.subplots()
     ax.imshow(im)
 
+    ind = 0
+
+    if offset==True:
+        ind = 1
+
     for i in data:
-        xcent = i[1]*640
-        ycent = i[2]*640
-        xanc = xcent-((i[3]*640)/2)
-        yacn = ycent-((i[4]*640)/2)
-        ax.add_patch(patches.Rectangle((xanc,yacn), (i[3]*640), (i[4]*640), linewidth =1, edgecolor = 'r', facecolor='none'))
+        xcent = i[ind]*640
+        ycent = i[ind+1]*640
+        xanc = xcent-((i[ind+2]*640)/2)
+        yacn = ycent-((i[ind+3]*640)/2)
+        ax.add_patch(patches.Rectangle((xanc,yacn), (i[ind+2]*640), (i[ind+3]*640), linewidth =1, edgecolor = 'r', facecolor='none'))
 
     plt.show()
     
