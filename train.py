@@ -117,8 +117,8 @@ def predict_draw(img_path, bbox):
 
 
 
-bbox = predict(img_path = os.getcwd()+"\\test_data\images\\test.jpg", model_path = "runs\detect\\train14_dropout\weights\\best.pt")
-u.draw_pose(image = os.getcwd()+"\\test_data\images\\test.jpg", data = bbox, offset=False)
+#bbox = predict(img_path = os.getcwd()+"\\test_data\images\\test.jpg", model_path = "runs\detect\\train14_dropout\weights\\best.pt")
+#u.draw_pose(image = os.getcwd()+"\\test_data\images\\test.jpg", data = bbox, offset=False)
 
 
 #bbox = predict(img_path = os.getcwd()+"\\test_data\images\\test_adjecent.jpg", model_path = "runs\detect\\train14_dropout\weights\\best.pt",num_plate=2)
